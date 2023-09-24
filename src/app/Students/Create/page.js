@@ -68,8 +68,8 @@ export default function CreateStudents() {
 
                 <div className="mt-2">
                     <label className="inline-block w-20">Gender</label>
-                    <label htmlFor="rdMale">Male </label>
-                    <input name="age" type="radio" id="rdMale" className="mr-2" value="M" checked={student.gender === "M"} onChange={
+                    <label htmlFor="rdMale">
+                    <input name="gender" type="radio" id="rdMale" className="mr-2" value="M" checked={student.gender === "M"} onChange={
                         (e) => {
                             setStudent({
                                 ...student,
@@ -77,9 +77,10 @@ export default function CreateStudents() {
                             })
                         }
                     }  ></input>
+                    Male </label>
 
-                    <label htmlFor="rdFemale" >Female</label>
-                    <input  name="age" type="radio" id="rdFemale" className="mr-2" value="F" checked={student.gender === "F"} onChange={
+                    <label htmlFor="rdFemale" >
+                    <input  name="gender" type="radio" id="rdFemale" className="mr-2" value="F" checked={student.gender === "F"} onChange={
                         (e) => {
                             setStudent({
                                 ...student,
@@ -87,6 +88,7 @@ export default function CreateStudents() {
                             })
                         }
                     } ></input>
+                    Female</label>
                 </div>
 
                 <AppButton type="submit" className="mt-2">Save </AppButton>
