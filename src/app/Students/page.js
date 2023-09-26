@@ -70,8 +70,8 @@ export default function Students() {
   }, [pagination.pageIndex]);
 
   return (
-    <div className="">
-      <div className="">
+    <div className="bg-lime-300 min-h-screen">
+      <div className="container mx-auto text-center">
         <div className="text-2xl font-bold">Students</div>
         <AppButton className="mr-2" color="blue" onClick={createNew}>
           Create new
@@ -151,12 +151,12 @@ export default function Students() {
           </div>       
           {searchResult.data
           .map((student) => (
-            <div key={student.id} className="border p-2 mt-2">
+            <div key={student.id} className="border border-solid border-black p-2 mt-2">
               <div>Name: {student.name}</div>
               <div>Age: {student.age}</div>
               <div>Gender: {getGender(student.gender)}</div>
               <div>
-                <AppButton  color="red" onClick={() => confirmDelete(student)}>
+                <AppButton className="mr-2"  color="red" onClick={() => confirmDelete(student)}>
                   Delete
                 </AppButton>
                 <AppButton  color="blue" onClick={() => editStudent(student.id)}>
@@ -165,7 +165,7 @@ export default function Students() {
               </div>
             </div>
           ))}
-          <AppPagination
+          <AppPagination className=""
             {...pagination} 
             total={searchResult.total} 
             setPageIndex={(newPageIndex) => {

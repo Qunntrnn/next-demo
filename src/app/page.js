@@ -11,9 +11,9 @@ export default function Home() {
   };
 
   return (
-    <main className="">
-      <div className="">
-        <h1 className="">Studentd Manager</h1>
+    <div className="bg-lime-300 min-h-screen">
+      <div className="container mx-auto text-center">
+        <h1 className="text-2xl font-bold">Student Manager</h1>
         <div className="">
           <AppButton className="mr-2" color="blue" onClick={goToStudentsPage}>
             Go to Students
@@ -21,6 +21,6 @@ export default function Home() {
           <AppButton color="red" onClick={goToStudentsPage}>Test</AppButton>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

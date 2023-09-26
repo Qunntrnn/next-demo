@@ -54,8 +54,8 @@ export default function EditStudent({ params }) {
     return <div></div>;
   }
   return (
-    <div className="">
-      <div className="">
+    <div className="bg-lime-300 min-h-screen">
+      <div className="container mx-auto text-center">
         <h2 className="text-2xl font-bold mb-4">Edit Student</h2>
         <form onSubmit={onSubmit}>
           <div className="mb-4">
@@ -108,8 +108,8 @@ export default function EditStudent({ params }) {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-semibold">Gender</label>
-            <div>
+            <label className="inline-block w-20">Gender</label>
+        
               <label htmlFor="rdMale" className="inline-block mr-2">
                 <input
                   id="rdMale"
@@ -144,7 +144,6 @@ export default function EditStudent({ params }) {
                 />
                 Female
               </label>
-            </div>
           </div>
           <AppButton type="submit" color="blue">
             Save

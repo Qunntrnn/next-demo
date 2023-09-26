@@ -35,8 +35,8 @@ export default function CreateNewStudent() {
   };
 
   return (
-    <div className="">
-      <div className="">
+    <div className="bg-lime-300 min-h-screen">
+      <div className="container mx-auto text-center">
         <h2 className="text-2xl font-bold mb-4">Create New Student</h2>
         <form onSubmit={onSubmit}>
           <div className="mb-4">
