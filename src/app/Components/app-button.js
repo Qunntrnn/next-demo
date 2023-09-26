@@ -1,23 +1,19 @@
-
-
-export const AppButton = ({ color,children,className, ...otherProps}) => {
-    let colorClass = "text-blue-600 border-blue-600"
-    if (color === "success") {
-        colorClass = "text-green-600 border-green-600";
-    } else if (color === "warning") {
-        colorClass = "text-yellow-600 border-yellow-600";        
-    } else if (color === "error") {
-        colorClass = "text-red-600 border-red-600"
+export const AppButton = ({ color, className, children, ...otherProps }) => {
+    let buttonClassName = 
+    "px-4 py-2 text-sm rounded-full cursor-pointer"
+    if (color === "red") {
+        buttonClassName += " bg-red-500 text-white ";
+    } else if (color === "blue") {
+        buttonClassName += " bg-blue-500 text-black";
+    } else if (color === "gray") {
+        buttonClassName += " bg-gray-500 text-black";
     }
-
+    if (className) {
+        buttonClassName += " " + className;
+    }
     return (
-        <button
-        {...otherProps}
-        className={ `border border-solid py-2 px-4 round-full ${colorClass} ${
-            className ??  "" 
-        } `}  
-        >
-            {children}
-        </button>
-    )
-}
+    <button className={buttonClassName} {...otherProps}>
+        {children}
+    </button>
+    );
+};

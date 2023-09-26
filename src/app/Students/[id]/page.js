@@ -1,13 +1,17 @@
 'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { studentService } from "../../services/student.service";
-import { AppButton } from "../../Components/app-button";
 
-export default function CreateNewStudent() {
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { AppButton } from "../../Components/app-button";
+import { studentService } from "../../services/student.service";
+
+export default function EditStudent({ params }) {
+  console.log(params.id);
   const router = useRouter();
   const [student, setStudent] = useState({
+    id: undefined,
     name: "",
     age: "",
     gender: "M",
@@ -25,26 +29,54 @@ export default function CreateNewStudent() {
         alert("Please enter age");
         return;
       }
-      await studentService.createStudent(student);
+      await studentService.updateStudent(student);
       alert("Save success!");
       router.push("/Students");
     } catch (e) {
-      alert("Error creating student");
+      alert("Save Fail");
       console.error(e);
     }
   };
 
+  useEffect(() => {
+    const findStudent = async () => {
+      const student = await studentService.findStudentById(+params.id);
+      if (!student) {
+        alert("Student not found");
+        return;
+      }
+      setStudent(student);
+    }
+    findStudent();
+  }, []);
+
+  if (!student.id) {
+    return <div></div>;
+  }
   return (
     <div className="">
       <div className="">
-        <h2 className="text-2xl font-bold mb-4">Create New Student</h2>
+        <h2 className="text-2xl font-bold mb-4">Edit Student</h2>
         <form onSubmit={onSubmit}>
+          <div className="mb-4">
+            <label htmlFor="id" className="inline-block w-20">
+              Id
+            </label>
+            <input
+              className="border border-gray-300 px-3 py-2 rounded w-500 font-bold text-black"
+              type="text"
+              name="id"
+              id="id"
+              value={student.id}
+              disabled
+            />
+          </div>          
           <div className="mb-4">
             <label htmlFor="name" className="inline-block w-20">
               Name
             </label>
             <input
-              className="border border-solid-300 px-3 py-2 rounded w-500 font-bold text-black"
+              className="border border-gray-300 px-3 py-2 rounded w-500 font-bold text-black"
               type="text"
               name="name"
               id="name"
@@ -62,7 +94,7 @@ export default function CreateNewStudent() {
               Age
             </label>
             <input
-               className="border border-solid-300 px-3 py-2 rounded w-500 font-bold text-black"
+              className="border border-gray-300 px-3 py-2 rounded w-500 text-black font-bold"
               id="age"
               name="age"
               type="number"
@@ -70,13 +102,14 @@ export default function CreateNewStudent() {
               onChange={(e) => {
                 setStudent({
                   ...student,
-                  age: e.target.value,
+                  age: +e.target.value,
                 });
               }}
             />
           </div>
           <div className="mb-4">
-            <label className="inline-block w-20">Gender</label>
+            <label className="block text-sm font-semibold">Gender</label>
+            <div>
               <label htmlFor="rdMale" className="inline-block mr-2">
                 <input
                   id="rdMale"
@@ -111,7 +144,7 @@ export default function CreateNewStudent() {
                 />
                 Female
               </label>
-          
+            </div>
           </div>
           <AppButton type="submit" color="blue">
             Save
