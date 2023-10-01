@@ -3,13 +3,15 @@
 
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import { AppButton } from "../Components/app-button";
 import { AppPagination } from "../Components/app-pagination";
 import { studentService } from "../services/student.service";
+import { ThemeContext } from "../contexts/theme.context";
 
 export default function Students() {
+  const theme = useContext(ThemeContext);
   const [searchResult, setSearchResult] = useState({
     data: [],
     total: 0,
@@ -71,6 +73,7 @@ export default function Students() {
 
   return (
     <div className="bg-lime-300 min-h-screen">
+      <div>Theme : {theme}</div>
       <div className="container mx-auto text-center">
         <div className="text-2xl font-bold">Students</div>
         <AppButton className="mr-2" color="blue" onClick={createNew}>
