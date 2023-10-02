@@ -1,12 +1,12 @@
 "use client";
 
-
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { AppButton } from "../components/app-button";
 
-export default function SignIn() {
+export default function Register() {
 const router = useRouter();
   const [signInData, setSignInData] = useState({
     email: "",
@@ -15,8 +15,6 @@ const router = useRouter();
 
   const onSubmit = async (e) => {
     try {
-      e.preventDefault();
-
       if (!signInData.email) {
         alert("Please input email");
         return;
@@ -26,10 +24,10 @@ const router = useRouter();
         return;
       }
       const auth = getAuth();
-      await signInWithEmailAndPassword (
-        auth,
-        signInData.email,
-        signInData.password,
+      await createUserWithEmailAndPassword(
+        auth, 
+        signInData.email, 
+        signInData.password
       );
       router.push("/");
     } catch (e) {
@@ -40,8 +38,8 @@ const router = useRouter();
   return (
     <div className="bg-lime-300 min-h-screen">
       <div className="container mx-auto text-center">
-        <h2 className="text-2xl font-bold mb-4">Sign In</h2>
-        <form onSubmit={onSubmit}>
+        <h2 className="text-2xl font-bold mb-4">Register</h2>
+        <div>
           <div className="mb-4">
             <label htmlFor="email" className="inline-block w-20">
               Email
@@ -78,10 +76,14 @@ const router = useRouter();
               }}
             />
           </div>
-          <AppButton type="submit" color="blue">
-            Sign in
+          <AppButton
+          type="button" 
+          onClick={onSubmit} 
+          color="blue"
+          >
+            Register
           </AppButton>
-        </form>
+        </div>
       </div>
     </div>
   );

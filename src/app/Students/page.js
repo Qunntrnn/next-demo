@@ -5,10 +5,11 @@
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
-import { AppButton } from "../Components/app-button";
-import { AppPagination } from "../Components/app-pagination";
-import { studentService } from "../services/student.service";
+
 import { ThemeContext } from "../contexts/theme.context";
+import { AppButton } from "../components/app-button";
+import { studentService } from "../services/student.services";
+import { AppPagination } from "../components/app-pagination";
 
 export default function Students() {
   const theme = useContext(ThemeContext);
@@ -72,9 +73,10 @@ export default function Students() {
   }, [pagination.pageIndex]);
 
   return (
+    <>
     <div className="bg-lime-300 min-h-screen">
-      <div>Theme : {theme}</div>
       <div className="container mx-auto text-center">
+        <div>Theme: {theme}</div>
         <div className="text-2xl font-bold">Students</div>
         <AppButton className="mr-2" color="blue" onClick={createNew}>
           Create new
@@ -97,7 +99,7 @@ export default function Students() {
           />
           </div> 
           <div className="mb-4">
-            <label className="">Gender</label>
+            <label className="block text-sm font-semibold">Gender</label>
             <div>
               <label htmlFor="rdAll" className="inline-block mr-2">
                 <input
@@ -154,21 +156,21 @@ export default function Students() {
           </div>       
           {searchResult.data
           .map((student) => (
-            <div key={student.id} className="border border-solid border-black p-2 mt-2">
+            <div key={student.id} className="border border-solid p-2 mt-2">
               <div>Name: {student.name}</div>
               <div>Age: {student.age}</div>
               <div>Gender: {getGender(student.gender)}</div>
               <div>
-                <AppButton className="mr-2"  color="red" onClick={() => confirmDelete(student)}>
+                <AppButton color="red" onClick={() => confirmDelete(student)}>
                   Delete
                 </AppButton>
-                <AppButton  color="blue" onClick={() => editStudent(student.id)}>
+                <AppButton color="blue" onClick={() => editStudent(student.id)}>
                   Edit
                 </AppButton>                
               </div>
             </div>
           ))}
-          <AppPagination className=""
+          <AppPagination
             {...pagination} 
             total={searchResult.total} 
             setPageIndex={(newPageIndex) => {
@@ -182,5 +184,6 @@ export default function Students() {
         </div>
       </div>
     </div>
+    </>
   );
 }

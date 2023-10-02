@@ -4,8 +4,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AppButton } from "../../Components/app-button";
-import { studentService } from "../../services/student.service";
+import { AppButton } from "../../components/app-button";
+import { studentService } from "../../services/student.services";
 
 export default function EditStudent({ params }) {
   console.log(params.id);

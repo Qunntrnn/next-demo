@@ -1,9 +1,10 @@
 'use client';
 
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { studentService } from "../../services/student.service";
-import { AppButton } from "../../Components/app-button";
+import { studentService } from "../../services/student.services";
+import { AppButton } from "../../components/app-button";
 
 export default function CreateNewStudent() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function CreateNewStudent() {
       console.error(e);
     }
   };
-
+  console.log("students", student, student.gender === "M");
   return (
     <div className="bg-lime-300 min-h-screen">
       <div className="container mx-auto text-center">
@@ -62,7 +63,7 @@ export default function CreateNewStudent() {
               Age
             </label>
             <input
-               className="border border-solid-300 px-3 py-2 rounded w-500 font-bold text-black"
+              className="border border-solid-300 px-3 py-2 rounded w-500 font-bold text-black"
               id="age"
               name="age"
               type="number"
@@ -77,6 +78,7 @@ export default function CreateNewStudent() {
           </div>
           <div className="mb-4">
             <label className="inline-block w-20">Gender</label>
+            
               <label htmlFor="rdMale" className="inline-block mr-2">
                 <input
                   id="rdMale"
@@ -111,7 +113,6 @@ export default function CreateNewStudent() {
                 />
                 Female
               </label>
-          
           </div>
           <AppButton type="submit" color="blue">
             Save

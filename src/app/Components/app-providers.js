@@ -1,27 +1,35 @@
-"use client"
+"use client";
 
+import { Provider } from "react-redux";
 import { useState } from "react";
-import { ThemeContext } from "../contexts/theme.context";
-import {Provider,connect} from "react-redux"
+
 import { AppButton } from "./app-button";
+
+import { AppFirebase } from "./app-firebase";
+import { ThemeContext } from "../contexts/theme.context";
 import { store } from "../store/store";
 
-
-export const AppProviders = ({children}) => {
-    const [theme,setTheme] = useState("light")
+export const AppProvider = ({ children }) => {
+    const [theme, setTheme] = useState("light");
     const toggleTheme = () => {
         if (theme === "light") {
             setTheme("dark");
-            return;  
+            return;
         }
-        setTheme("light")
-    }
-    return (<Provider store={store}>
-         <ThemeContext.Provider value={theme} >
-            <AppButton color="blue" onClick={toggleTheme}>Toggle Theme</AppButton>{children}
-            
+        setTheme("light");
+    };
+
+
+    return (
+        <Provider store={store}>
+            <AppFirebase>
+        <ThemeContext.Provider value={theme}>
+            <AppButton className="w-20" color="blue" onClick={toggleTheme}>
+                Toggle theme
+            </AppButton>
+            {children}
         </ThemeContext.Provider>
+        </AppFirebase>
         </Provider>
-
-
-)        }
+    )
+}
